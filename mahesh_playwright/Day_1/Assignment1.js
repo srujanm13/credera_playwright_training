@@ -27,3 +27,14 @@ if (ageNumber >= 18) {
 } else {
     console.log("The user is not an adult.");
 }
+
+//Assignment#6: 6.	Create an object representing a test case (id, title, status) and display it using console.table().
+let testCase = {
+    id: 1, 
+    title: "Test Case",
+    status: "Pass"
+}
+console.table(testCase);
+
+console.log(false == 0);
+console.log(false === 0);
