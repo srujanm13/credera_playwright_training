@@ -1,18 +1,12 @@
-// Function to find the highest mark using the Rest Parameter (...) and Math.max()
+// Function to find the highest mark from a list of marks
 function getHighestMark(...marks) {
-
-// Spread the marks array into individual arguments for Math.max()
+    // Use Math.max() to find the highest mark among the provided values
     return Math.max(...marks);
 }
 
-// Test case: Find the highest mark among the given values
-// Expected output: 92
+// Calling the function with different sets of marks and logging the results
 console.log(getHighestMark(85, 92, 78, 88));
 
-// Test case: Find the highest mark from multiple values
-// Expected output: 95
 console.log(getHighestMark(95, 87, 91, 89, 93));
 
-// Test case: Only one mark is provided
-// Expected output: 76
-console.log(getHighestMark(76));
+console.log(getHighestMark(76, 44));
