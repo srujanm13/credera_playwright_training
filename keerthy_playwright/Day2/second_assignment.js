@@ -1,25 +1,18 @@
-// Function to determine a student's result based on marks obtained
-function checkStudentStatus(marks) {
-
-    // If marks are 70 or above, student gets Distinction
-    if (marks >= 70) {
+//Define a function to determine a student's result based on marks obtained
+function checkStudentStatus(marksObtained) {
+    // If marks obtained are 90 or above, student gets Distinction
+    if (marksObtained >= 90) {
         return "Distinction";
-
-    // If marks are between 40 and 69, student has Passed
-    } else if (marks >= 40) {
+    } else if (marksObtained >= 40) { // If marks obtained are between 40 and above and below 90, student has Passed
         return "Passed";
-
-    // If marks are below 40, student has Failed
-    } else {
+    } else { // If marks are below 40, student has Failed
         return "Failed";
     }
 }
 
-// Test case: Marks = 85, expected result -> Distinction
-console.log(checkStudentStatus(85));
+//Calling the function with different marks obtained and logging the results
+console.log(checkStudentStatus(95));
 
-// Test case: Marks = 55, expected result -> Passed
 console.log(checkStudentStatus(55));
 
-// Test case: Marks = 30, expected result -> Failed
-console.log(checkStudentStatus(30));
+console.log(checkStudentStatus(35));
