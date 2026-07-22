@@ -3,7 +3,7 @@
 
 const marks = [75, 80, 65, 90, 88]; 
 let total = 0;
-for (let x of marks){
+for (let x of marks){            //for of loop
     total = total + x;
 }
 console.log("Total marks are " + total)

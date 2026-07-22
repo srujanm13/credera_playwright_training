@@ -6,5 +6,5 @@ var Car = {
 }
 
 console.log(Car.name);
-console.log(Car["price"]);
+console.log(Car["price"]); // preferred way to access  
 console.log(Car.instock);
