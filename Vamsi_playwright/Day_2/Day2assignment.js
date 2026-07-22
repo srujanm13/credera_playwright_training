@@ -18,9 +18,9 @@ let marks = 80;
 if (marks >= 75) {
     console.log("Distinction");
 } else if (marks >= 35) {
-    console.log("passed");
+    console.log("pass");
  } else {
-        console.log("Failed");
+        console.log("Fail");
     }
 
 //3.Loops (for) 
@@ -81,8 +81,8 @@ console.log("Cube of 5 is: " + cube(5));
 function calculateBill(amount, tax = 0.18) {
     return amount + (amount * tax);   // Bill = amount + Tax,  TAX = amount * tax
 }   
-console.log(calculateBill(1000)); // without tax, default tax 18%
-console.log(calculateBill(1000, 0.2)); // with tax
+console.log(calculateBill(100)); // without tax, default tax 18%
+console.log(calculateBill(100, 0.2)); // with tax
 
 // 8. Rest Parameters Program 
 // Write a function that accepts any number of marks and returns the highest mark. 
