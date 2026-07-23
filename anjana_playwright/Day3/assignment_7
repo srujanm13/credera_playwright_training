@@ -1,0 +1,11 @@
+const employee = {
+  name: "John",
+  age: 30,
+  department: "QA"
+}
+//keys
+console.log(Object.keys(employee))   
+//both keys & values
+console.log(Object.entries(employee)) 
+//values
+console.log(Object.values(employee))

@@ -1,0 +1,10 @@
+const employee = {
+    id: 101,
+    name: "John",
+    department: "QA"
+}
+let json = JSON.stringify(employee)
+console.log("JSON ", json)
+console.log('department present or not? '+json.includes("department"))
+let obj = JSON.parse(json)
+console.log("Object" ,obj)
