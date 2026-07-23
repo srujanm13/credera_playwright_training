@@ -1,11 +1,9 @@
 // 8. Rest Parameters
 // Write a function that accepts any number of marks and returns the highest mark. 
 
-function Highestmarks(arr) {
-let max = 0;
-for (let i = 0; i < arr.length; i++) {
-if (arr[i] > max) max = arr[i];
-}
-return max;
-}
-console.log(Highestmarks([445, 12, 8, 130, 44])); 
+
+const highestMarks = (...marks) => {
+    if (marks.length === 0) return undefined;
+    return Math.max(...marks);
+};
+console.log(highestMarks(15, 445, 2,8, 130, 744)); // 744
