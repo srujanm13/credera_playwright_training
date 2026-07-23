@@ -1,0 +1,6 @@
+const employee = { 
+    name: "John", 
+    age: 30, 
+    department: "QA" 
+};
+console.log(`${employee.name} aged ${employee.age} works in ${employee.department}`); 
