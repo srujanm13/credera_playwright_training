@@ -1,0 +1,23 @@
+{
+  "name": "credera_playwright_training",
+  "version": "1.0.0",
+  "description": "Each collaborator should maintain their work in a separate branch and organize assignments as shown below.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srujanm13/credera_playwright_training.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/srujanm13/credera_playwright_training/issues"
+  },
+  "homepage": "https://github.com/srujanm13/credera_playwright_training#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.0",
+    "@types/node": "^26.1.1"
+  }
+}
