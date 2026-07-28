@@ -74,7 +74,6 @@ test('Relative Locators', async ({ page }) => {
   await page.goto('https://smarterp-wgaw.onrender.com/');
   await page.locator('#username').fill('admin');
   await page.locator('#password').fill('admin123');
-  await page.locator('#loginBtn').click();
   await expect(page).toHaveTitle('SmartERP Dashboard');
   await page.locator('#menuCustomers').click();
   //basic assertions
