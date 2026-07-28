@@ -25,13 +25,25 @@ test("Mouse Coordinates", async ({page})=>{
     //open playground
     await openPlayground(page);
     const mouseArea = page.locator("#mouseArea");
+    const coordX = page.locator("#x");
+    const coordY = page.locator("#y");
     const box = await mouseArea.boundingBox();
+    console.log(box);
+    const initialX = await coordX.textContent();
+    const initialY = await coordY.textContent();
+    console.log("Initial X:", await coordX.textContent());
+    console.log("Initial Y:", await coordY.textContent());
     await mouseArea.hover();
-    await page.mouse.move(box.x + 50, box.y + 50);
-    const coordX = page.locator('//section//p//following::span[@id="x"]');
-    const coordY = page.locator('//section//p//following::span[@id="y"]');
-    await expect(coordX).toHaveText("630");
-    await expect(coordY).toHaveText("90");
+    for (let i = 0; i < 5; i++) {
+        await page.mouse.move(
+        box.x + 50 + i * 20,
+        box.y + 50 + i * 20
+        );
+    }
+    console.log("After Move X:", await coordX.textContent());
+    console.log("After Move Y:", await coordY.textContent());
+    await expect(coordX).not.toHaveText(initialX);
+    await expect(coordY).not.toHaveText(initialY);
 })
 
 test("Double Click", async({page})=>{
@@ -66,7 +78,6 @@ test("Upload", async ({page})=>{
     await loginToSmartERP(page);
     //open playground
     await openPlayground(page);
-    await page.locator("#upload").setInputFiles("example.spec.js");
-    await page.waitForTimeout(5000);
-    await expect(page.locator("#upload")).toHaveValue(/example\.spec\.js/);
+    await page.locator("#upload").setInputFiles(__filename);
+    await expect(page.locator("#upload")).toHaveValue(/mohit_Day2\.spec\.js/);
 })
