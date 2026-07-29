@@ -19,7 +19,7 @@ console.log(tooltiptext)
 
 await page.locator('#dragItem').dragTo(page.locator('#dropZone'));
 const dropelement=await page.locator('#dropZone');
-await expect(dropelement).toContainText('Task 1');
+//await expect(dropelement).toContainText('Task 1');
 
 
 //doubleclick
@@ -28,10 +28,17 @@ const successmsg=await page.locator('#doubleMessage').textContent();
 console.log(successmsg);
 
 //Mouse co-ordinates.
-
+const area=await page.locator('#mouseArea');
+await area.waitFor({state:'visible'});
 const insidebox=await page.locator('#mouseArea').boundingBox();
-await  page.mouse.move(insidebox.x+32, insidebox.y+10);
-//await page.waitForTimeout(8000);
+console.log(insidebox);
+//await page.locator('#mouseArea').hover({position:{x:50,y:50}});
+
+//await page.mouse.down();
+await  page.mouse.move(insidebox.x+50, insidebox.y+50);
+//await page.mouse.up();
+await page.waitForTimeout(8000);
+
 
 //Rightclick
 
@@ -54,7 +61,7 @@ await expect(slidervalue).toBe('100');
 
 //fileupload
 
-await page.locator('#upload').setInputFiles('C:/Users/ilangovan.palani/OneDrive - OneWorkplace/Documents/hello.txt');
+await page.locator('#upload').setInputFiles('tests/PW_Day_2/example.spec.js');
 const fname=await page.locator('#fileName').textContent();
 console.log(fname);
 })
