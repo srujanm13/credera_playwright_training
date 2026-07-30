@@ -2,7 +2,7 @@
 //1. Please write tests handling all the elements on https://smarterp-wgaw.onrender.com/playground.html page on smartERP application.
 
   import { test, expect } from '@playwright/test';
-  import { loginToSmartERP } from '../helpers/Reusablespecs';
+  import { loginToSmartERP } from '../helpers/smartERP';
 
   test('Handle all elements', async ({ page }) => {
 
