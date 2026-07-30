@@ -64,7 +64,7 @@
 
   // File Upload
 
-  await page.locator("#upload").setInputFiles("C:/Users/vamsikrishna.alasand/Hello Text/hello.txt");
+  await page.locator("#upload").setInputFiles("./tests/PW_Day_3/VamsiDay7.spec.js");
   const filename = await page.locator("#fileName").textContent();
   console.log(filename);
 
