@@ -13,6 +13,11 @@ export async function openPlayground(page) {
     await expect(page).toHaveURL(/playground\.html$/);
 }
 
+export async function openCustomers(page) {
+    await page.getByRole("link",{name:/Customers/}).click();
+    await expect(page).toHaveURL(/customers\.html$/);
+}
+
 export async function openCustomersPage(page) {
     await page.locator("#menuCustomers").click();
     await expect(page.locator("#customersTable")).toBeVisible();
