@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Smart ERP Day 8 Tasks', () => {
+test.describe('Smart ERP Day 4 PW', () => {
 
     test.beforeEach(async ({ page }) => {
         await page.goto('https://smarterp-wgaw.onrender.com/');
