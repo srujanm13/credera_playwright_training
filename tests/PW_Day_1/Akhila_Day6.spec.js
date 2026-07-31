@@ -177,7 +177,6 @@ test('Locate the first row in a table body', async ({ page }) => {
 test('Locate element based on relationship', async ({ page }) => {
 
     await page.goto('https://smarterp-wgaw.onrender.com/');
-
     // Login
     await page.locator('input[name="username"]').fill('admin');
     await page.locator('input[name="password"]').fill('admin123');
