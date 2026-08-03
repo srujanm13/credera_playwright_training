@@ -2,7 +2,7 @@
 //1. Please write tests handling all the elements on https://smarterp-wgaw.onrender.com/playground.html page on smartERP application.
 
   import { test, expect } from '@playwright/test';
-  import { loginToSmartERP } from '../helpers/smartERP';
+  import { loginToSmartERP } from '../helpers/smarterp';
 
   test('Handle all elements', async ({ page }) => {
 
@@ -38,7 +38,7 @@
 
   // Mouse Hover
   await page.getByText("Move Mouse Here").hover();
-  //await page.mouse.move(insidebox.x+50, insidebox.y+40);
+  
 
   // Double Click
   const doubleBtn = page.locator("#doubleBtn");
@@ -64,7 +64,7 @@
 
   // File Upload
 
-  await page.locator("#upload").setInputFiles("./tests/PW_Day_3/VamsiDay7.spec.js");
+  await page.locator("#upload").setInputFiles("./tests/PW_Day_7/VamsiDay7.spec.js");
   const filename = await page.locator("#fileName").textContent();
   console.log(filename);
 
