@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { loginToSmartERP, openPlayground } from '../helpers/SmartERPLoginHelper';
+import { loginToSmartERP, openPlayground } from '../helpers/smarterp';
 
 test('Validate Playground Elements', async ({ page }) => {
 
