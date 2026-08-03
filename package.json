@@ -21,8 +21,5 @@
   "devDependencies": {
     "@playwright/test": "^1.62.0",
     "@types/node": "^26.1.1"
-  },
-  "dependencies": {
-    "exceljs": "^4.4.0"
   }
 }
