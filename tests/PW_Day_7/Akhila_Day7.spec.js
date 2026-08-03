@@ -44,7 +44,8 @@ test('Validate Playground Elements', async ({ page }) => {
     await slider.fill('70');
 
     //File upload button handling click event
-    const fileInput = page.locator('#upload')   ;
-    await fileInput.setInputFiles('tests/testfile.txt');
+    await page.locator("#upload").setInputFiles("./tests/PW_Day_7/Akhila_Day7.spec.js");
+    const filename = await page.locator("#fileName").textContent();
+    console.log(filename);
 
 })
