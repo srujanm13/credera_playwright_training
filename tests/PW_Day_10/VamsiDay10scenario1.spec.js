@@ -7,9 +7,11 @@ test("Scenario 1: Frame Handling", async ({ page, context }) => {
   const frame = page.frameLocator('frame[name="packageListFrame"]'); 
   await expect(frame.getByText("java.applet")).toBeVisible(); 
   await frame.getByText("java.applet").click(); 
+
   const frame2 = page.frameLocator('frame[name ="packageFrame"]'); 
   await expect(frame2.getByText("AppletContext")).toBeVisible(); 
   await frame2.getByText("AppletContext").click();
+  
   const frame3 = page.frameLocator('frame[name ="classFrame"]'); 
   await expect(frame3.locator("h2")).toContainText("Interface AppletContext");
   await context.close();

@@ -5,8 +5,6 @@ import { loginToSmartERP, openCustomers } from '../helpers/smarterp';
 
 test ('CSS Selectors', async ({ page }) => {
     await loginToSmartERP(page);
-
-    //Wait for page to load
     await page.waitForLoadState("networkidle");
 
     await page.locator("#menuCustomers").click();
