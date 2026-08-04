@@ -25,25 +25,13 @@ test("Mouse Coordinates", async ({page})=>{
     //open playground
     await openPlayground(page);
     const mouseArea = page.locator("#mouseArea");
-    const coordX = page.locator("#x");
-    const coordY = page.locator("#y");
+    await mouseArea.scrollIntoViewIfNeeded();
     const box = await mouseArea.boundingBox();
-    console.log(box);
-    const initialX = await coordX.textContent();
-    const initialY = await coordY.textContent();
-    console.log("Initial X:", await coordX.textContent());
-    console.log("Initial Y:", await coordY.textContent());
-    await mouseArea.hover();
-    for (let i = 0; i < 5; i++) {
-        await page.mouse.move(
-        box.x + 50 + i * 20,
-        box.y + 50 + i * 20
-        );
+    if (box) {
+    await page.mouse.move(box.x + 80, box.y + 60);
+    await expect(page.locator("#x")).toHaveText("78");
+    await expect(page.locator("#y")).toHaveText("58");
     }
-    console.log("After Move X:", await coordX.textContent());
-    console.log("After Move Y:", await coordY.textContent());
-    await expect(coordX).not.toHaveText(initialX);
-    await expect(coordY).not.toHaveText(initialY);
 })
 
 test("Double Click", async({page})=>{

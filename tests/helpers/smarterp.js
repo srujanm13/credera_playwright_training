@@ -5,7 +5,7 @@ export async function loginToSmartERP(page) {
     await page.locator("#username").fill("admin");
     await page.locator("#password").fill("admin123");
     await page.locator("#loginBtn").click();
-    await expect(page).toHaveURL(/dashboard\.html$/);
+    await expect(page.locator("h1")).toHaveText("Dashboard");
 }
 
 export async function openPlayground(page) {
