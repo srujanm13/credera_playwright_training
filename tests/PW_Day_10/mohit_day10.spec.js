@@ -25,4 +25,5 @@ test("Handling multiple Tabs/Windows ", async({page,context})=>{
     await page.bringToFront();
     await page.locator("//*[@class='dep1 investor-menu']//a[@href='/in/en/blog']").click();
     await expect(page).toHaveURL(/blog/);
+    await context.close();
 })
