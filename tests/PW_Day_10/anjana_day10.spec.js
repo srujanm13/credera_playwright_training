@@ -1,15 +1,22 @@
 import { test, expect } from "@playwright/test";
 
-test("Handling Frames", async ({ page }) => {
-  await page.goto("https://practice.expandtesting.com/iframe", {
-    waitUntil: "domcontentloaded",
-  });
-  const frame = page.frameLocator("#mce_0_ifr");
-  const editor = frame.locator("#tinymce");
-  await editor.clear();
-  const expectedText = "This is the sample text inside a frame element";
-  await editor.fill(expectedText);
-  await expect(editor).toHaveText(expectedText);
+test("Handle multiple frames in Oracle Java Docs", async ({ page }) => {
+  await page.goto(
+    "https://docs.oracle.com/javase/8/docs/api/index.html?overview-summary.html",
+    { waitUntil: "domcontentloaded" }
+  );
+  console.log("Total Frames:", page.frames().length)
+  expect(page.frames().length).toBe(0);
+  const packageFrame = page.frameLocator('frame[name="packageListFrame"]');
+  await packageFrame.getByText("java.applet").click();
+  const classFrame = page.frameLocator('frame[name="packageFrame"]');
+  await classFrame.getByText("Applet").click();
+  const classDocFrame = page.frameLocator('frame[name="classFrame"]');
+  await expect(
+    classDocFrame.getByRole("heading", { name: "Applet" })
+  ).toBeVisible();
+  await expect(classDocFrame.locator("body")).toContainText("Applet");
+  console.log("Successfully navigated through all frames.");
 });
 
 test.only("Handling Multiple Tabs", async ({ page, context }) => {
