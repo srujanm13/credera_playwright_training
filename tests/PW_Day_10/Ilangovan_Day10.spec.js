@@ -16,7 +16,7 @@ test('Handling frames',async({page})=>{
     
 })
 
-test.only('Multiple windows',async({browser})=>{
+test('Multiple windows',async({browser})=>{
     
     const context=await browser.newContext();
     const page=await context.newPage();
