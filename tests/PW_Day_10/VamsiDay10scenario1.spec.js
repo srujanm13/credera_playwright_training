@@ -1,19 +1,17 @@
 
 import { test, expect } from "@playwright/test";
 
-test("Scenario 1", async ({ page }) => {
+test("Scenario 1: Frame Handling", async ({ page, context }) => {
 
-  // Navigate to the page
-  await page.goto("https://practice.expandtesting.com/iframe");
+  await page.goto("https://docs.oracle.com/javase/8/docs/api/");
+  const frame = page.frameLocator('frame[name="packageListFrame"]'); 
+  await expect(frame.getByText("java.applet")).toBeVisible(); 
+  await frame.getByText("java.applet").click(); 
+  const frame2 = page.frameLocator('frame[name ="packageFrame"]'); 
+  await expect(frame2.getByText("AppletContext")).toBeVisible(); 
+  await frame2.getByText("AppletContext").click();
+  const frame3 = page.frameLocator('frame[name ="classFrame"]'); 
+  await expect(frame3.locator("h2")).toContainText("Interface AppletContext");
+  await context.close();
 
-  // Switch to the iframe
-  const textField = page.frameLocator("#mce_0_ifr").locator("#tinymce"); 
-
-  // Enter text
-  const outputText = "This is the sample text inside a frame element";
-  await textField.fill(outputText);
-  console.log("Entered Text:", outputText);
-
-  // Assertion
-  await expect(textField).toHaveText(outputText);
 });

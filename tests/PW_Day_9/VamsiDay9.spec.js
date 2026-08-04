@@ -2,32 +2,28 @@
 import { test, expect } from '@playwright/test';
 import { loginToSmartERP, openCustomers } from '../helpers/smarterp';
 
-test('Wait Strategies & JSON Validation', async ({ page }) => {
+test('Wait Strategies & JSON Validation', async ({ page, context }) => {
 
-  await page.goto("https://smarterp-wgaw.onrender.com/", {
-    waitUntil: "load"
+    await page.goto("https://smarterp-wgaw.onrender.com/", {  waitUntil: "load"
 });
     //Login
-    await loginToSmartERP(page); // Login to SmartERP application
+    await loginToSmartERP(page); 
 
-// 2. Loader disappears
-const loader = page.locator(".loading"); // Loader element locator
-await expect(loader).toBeHidden();
+    // 2. Loader disappears
+    const loader = page.locator(".loading");
+    await expect(loader).toBeHidden();
 
-// Dashboard
-await expect(page.locator("h2").first()).toHaveText("SmartERP"); // Dashboard logo and title showing
-
-console.log("Login successfully and wait strategies executed.");
+    // Dashboard
+    await expect(page.locator("h2").first()).toHaveText("SmartERP");
 
     // 3. JSON Validation
-
     const json = {
-        id: 4567,         // id field is a number
-        name: "tester",    // name field is a string
-        Email: "test@omnicom",  // Email field contains "@" symbol
-        active: true,   // active field is a boolean
+        id: 4567,         
+        name: "tester",    
+        Email: "test@omnicom",  
+        active: true,   
         roles: ["QA", "Admin"],    
-        date: "2026-07-30"  // Date format: YYYY-MM-DD
+        date: "2026-07-30"  
     };
 
     // id
@@ -50,13 +46,15 @@ console.log("Login successfully and wait strategies executed.");
 
 
     // 4. Database Connected
-await expect(page.getByText("✅ Database Connected")).toBeVisible();
+    await expect(page.getByText("✅ Database Connected")).toBeVisible();
 
     // 5. Customer Dropdown Values
 
     await openCustomers(page);
     const dropdown = page.locator("#statusFilter");
     const options = await dropdown.locator("option").allTextContents();
-    const trimmedOptions = options.map(option => option.trim());  // Trim using to remove whitespaces from the options fields
-    console.log(trimmedOptions);
+    const trimmedOptions = options.map(option => option.trim()); 
+
+    await context.close();
+
 });

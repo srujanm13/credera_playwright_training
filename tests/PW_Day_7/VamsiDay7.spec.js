@@ -4,14 +4,14 @@
   import { test, expect } from '@playwright/test';
   import { loginToSmartERP } from '../helpers/smarterp';
 
-  test('Handle all elements', async ({ page }) => {
+  test('Handle all elements', async ({ page, context }) => {
 
   // Login
   await loginToSmartERP(page);
 
   // Dashboard
   await expect(page.locator("h2").first()).toHaveText("SmartERP");
-  //await expect(page.getByText("Dashboard")).toBeVisible();
+
 
   // Open Playground
   await expect(page.locator("#playgroundMenu")).toBeVisible();
@@ -67,6 +67,10 @@
   await page.locator("#upload").setInputFiles("./tests/PW_Day_7/VamsiDay7.spec.js");
   const filename = await page.locator("#fileName").textContent();
   console.log(filename);
+
+  // Close browser context
+  await context.close();
+
 
 });
 
