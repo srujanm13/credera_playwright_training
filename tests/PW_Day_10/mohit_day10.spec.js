@@ -1,11 +1,12 @@
 import {test, expect, chromium} from '@playwright/test'
+import { loginToSmartERP, openPlayground } from '../helpers/smarterp';
 
 test("Handling Frames ", async ({page})=>{
-    await page.goto("https://practice.expandtesting.com/iframe",{waitUntil:'domcontentloaded'});
-    const editor = page.frameLocator('#mce_0_ifr').locator('#tinymce');
-    const input = "This is the sample text inside a frame element";
-    await editor.fill(input);
-    await expect(editor).toHaveText(input);
+    await loginToSmartERP(page);
+    await openPlayground(page)
+    const editor = page.frameLocator("#demoFrame").locator("#searchInput");
+    await editor.fill("Rahul");
+    await expect(editor).toHaveValue("Rahul");
 })
 
 test("Handling multiple Tabs/Windows ", async({page,context})=>{
