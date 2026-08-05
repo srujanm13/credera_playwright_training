@@ -1,7 +1,6 @@
 import{test,expect} from'@playwright/test'
 
 test('Handling frames',async({page})=>{
-
     await page.goto("https://smarterp-wgaw.onrender.com/ ");
     await page.locator('#username').fill("admin");
     await page.locator('#password').fill("admin123");
@@ -12,12 +11,10 @@ test('Handling frames',async({page})=>{
     await expect(frame.locator('#menuProducts')).toBeVisible();
     await frame.locator('#menuProducts').click();
     await frame.locator('#description').fill('This is the sample text inside a frame element');
-    await expect(frame.locator('#description')).toHaveValue('This is the sample text inside a frame element');
-    
+    await expect(frame.locator('#description')).toHaveValue('This is the sample text inside a frame element');   
 })
 
 test('Multiple windows',async({browser})=>{
-    
     const context=await browser.newContext();
     const page=await context.newPage();
     await page.goto("https://www.hyundai.com/in/en",{waitUntil:'domcontentloaded'});
@@ -33,7 +30,3 @@ test('Multiple windows',async({browser})=>{
     await page.getByText('Blog').first().click();
     await expect(page).toHaveURL(/blog/);   
 })
-
-
-
-
