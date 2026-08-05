@@ -33,12 +33,14 @@ const successMessage = page.getByText('Login Successful...', { exact: true });
 await expect(successMessage).toBeVisible({ timeout: 5000 });
 })
 
-test ('loading symbol assertion', async({page})=>{
-await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+test('loading symbol assertion', async({page})=>{
+  await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
   await page.getByPlaceholder('Enter username').fill('admin');
   await page.getByPlaceholder('Enter password').fill('admin123');
   await page.getByRole('button', { name: 'Login' }).click({timeout: 1000});
-await page.waitForLoadState('load',{timeout: 1000});
+  await page.waitForLoadState('load',{timeout: 1000});
+  const loadingSpinner = page.locator('.spinner, .loader, [class*="loading"], [class*="spinner"]').first();
+  await expect(loadingSpinner).not.toBeVisible();
 })
  
 test ('Database Assertion', async({page})=>{
@@ -57,22 +59,16 @@ await page.waitForLoadState('networkidle', { timeout: 15000 });
 const dropdown = page.getByRole('combobox').first();
 await expect(dropdown).toBeVisible({ timeout: 10000 });
 await dropdown.click();
-
-  const options = dropdown.locator('option');
-  const optionCount = await options.count();
-  
-  const expectedValues = ['All Status', 'Active', 'Inactive', 'Suspended'];
-  const foundValues = [];
-  
- 
-  for (let i = 0; i < optionCount; i++) {
+const options = dropdown.locator('option');
+const optionCount = await options.count();  
+const expectedValues = ['All Status', 'Active', 'Inactive', 'Suspended'];
+const foundValues = [];
+for (let i = 0; i < optionCount; i++) {
     const optionText = await options.nth(i).textContent();
     const cleanText = optionText?.trim() || '';
     foundValues.push(cleanText);
-  
   }
     
-   
   expectedValues.forEach(expected => {
     const found = foundValues.some(val => 
       val.toLowerCase() === expected.toLowerCase()
@@ -100,7 +96,6 @@ await dropdown.click();
       active: expect.any(Boolean)
     })
   );
-
 
   expect(json.date).toEqual(
     expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/)

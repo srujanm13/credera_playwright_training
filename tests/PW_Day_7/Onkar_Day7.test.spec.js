@@ -16,7 +16,6 @@ test('Drag & Drop', async ({ page }) => {
   await drag.dragTo(drop);   
   await page.waitForTimeout(2000);
   await expect(drop).toContainText('Task 1');  
-
 })
 
 test('Mouse Movement', async ({ page }) => {
@@ -35,23 +34,22 @@ test('Mouse Movement', async ({ page }) => {
     await page.mouse.move(box.x + 50 + i * 20, box.y + 50 + i * 20);
     await page.waitForTimeout(300);
   }
+    await page.waitForTimeout(1000);
 
-  await page.waitForTimeout(1000);
-
-  const updatedX = await coordinateX.textContent();
-  const updatedY = await coordinateY.textContent();
-  expect(updatedY?.trim()).not.toBe(initialY?.trim());
+const updatedX = await coordinateX.textContent();
+const updatedY = await coordinateY.textContent();
+expect(updatedY?.trim()).not.toBe(initialY?.trim());
 });
 
 test('Double Click', async ({ page }) => {
   await loginToSmartERP(page);
   await openPlayground(page);
-  await page.getByRole('button', { name: 'Double Click Me' }).dblclick();
-  await page.waitForTimeout(2000);
+  const doubleClick = page.getByRole('button', { name: 'Double Click Me' })
+  await doubleClick.dblclick();
   await expect(page.getByText('Double Click Success')).toBeVisible();
   })
 
-  test('Right Click', async ({ page }) => {
+test('Right Click', async ({ page }) => {
   await loginToSmartERP(page);
   await openPlayground(page);
   const rightClick = page.getByText('Right Click Here');
@@ -61,7 +59,6 @@ test('Double Click', async ({ page }) => {
   await expect(page.getByText('Edit')).toBeVisible();
   await expect(page.getByText('Delete')).toBeVisible();
   await expect(page.getByText('Export')).toBeVisible();
-  
 });
   
 test ('Slider', async ({ page }) => {
