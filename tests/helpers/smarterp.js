@@ -13,10 +13,7 @@ export async function openPlayground(page) {
     await expect(page).toHaveURL(/playground\.html$/);
 }
 
-
 export async function openCustomers(page) {
     await page.getByRole("link",{name:/Customers/}).click();
     await expect(page).toHaveURL(/customers\.html$/);
 }
-
-
