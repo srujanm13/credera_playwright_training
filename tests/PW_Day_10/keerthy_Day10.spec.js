@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+
 test('Handling External Frame for smarterp', async ({ page }) => {
     await page.goto('https://smarterp-wgaw.onrender.com/playground.html', {
         waitUntil: 'domcontentloaded'
@@ -11,6 +12,7 @@ test('Handling External Frame for smarterp', async ({ page }) => {
         page.locator('#frameStatus')
     ).toHaveText('Viewing Customer Records.');
 });
+
 test('Handling External Frame - Product Description', async ({ page }) => {
     await page.goto('https://smarterp-wgaw.onrender.com/playground.html', {
         waitUntil: 'domcontentloaded'
@@ -27,7 +29,6 @@ test('Handling External Frame - Product Description', async ({ page }) => {
     await expect(description).toHaveValue(descriptionText);
 });
 test("Handling multiple Tabs/Windows ", async ({ page, context }) => {
-    //test.setTimeout(50000);
     await page.goto("https://www.hyundai.com/in/en", { waitUntil: "domcontentloaded" });
     await expect(page.getByLabel("testdrive")).toBeVisible();
     const [newPage] = await Promise.all([
