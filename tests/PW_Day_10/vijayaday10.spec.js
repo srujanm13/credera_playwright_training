@@ -11,7 +11,6 @@ test("Handling Frames ", async ({page})=>{
 })
 
 test("Handling multiple Tabs/Windows ", async({page,context})=>{
-    test.setTimeout(60000);
     await page.goto("https://www.hyundai.com/in/en",{waitUntil:"domcontentloaded"});
     await expect(page.getByLabel("testdrive")).toBeVisible();
     const [newPage] = await Promise.all([
@@ -24,7 +23,7 @@ test("Handling multiple Tabs/Windows ", async({page,context})=>{
     await expect(newPage.locator("#name")).toHaveValue(userName);
     await newPage.close();
     await page.bringToFront();
-    await page.locator("//*[@class='dep1 investor-menu']//a[@href='/in/en/blog']").click();
+    await expect(page.getByRole("link", { name: "Blog" })).toBeVisible();
+    await page.getByRole("link", { name: "Blog" }).click();
     await expect(page).toHaveURL(/blog/);
-    await context.close();
 })
