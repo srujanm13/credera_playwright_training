@@ -17,4 +17,3 @@ export async function openCustomers(page) {
     await page.getByRole("link",{name:/Customers/}).click();
     await expect(page).toHaveURL(/customers\.html$/);
 }
-
