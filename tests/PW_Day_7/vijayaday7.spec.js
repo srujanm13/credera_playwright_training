@@ -22,7 +22,8 @@ test.describe('Vijaya Day 7 - Playground Page Tests', () => {
     test('3 - Right click shows message', async ({ page }) => {
         await page.getByText('Right Click Here').click({ button: 'right' });
         const msg = await page.locator('#rightClickBox').textContent();
-        expect(msg).toBeTruthy();
+        expect(msg).toBe('Expected Right Click Message');
+
     });
 
     test('4 - Slider value can be changed', async ({ page }) => {
