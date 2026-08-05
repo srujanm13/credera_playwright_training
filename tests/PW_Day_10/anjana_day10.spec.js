@@ -23,22 +23,15 @@ test("Handling Multiple Tabs", async ({ page, context }) => {
   await page.goto("https://www.hyundai.com/in/en", {
     waitUntil: "domcontentloaded",
   });
-  // Open new tab
   const [newPage] = await Promise.all([
     context.waitForEvent("page"),
     page.locator('a[aria-label="testdrive"]').click(),
   ]);
-
-  // Enter name only
   const nameField = newPage.locator('input[placeholder="Name"]');
   const expectedName = "John Doe";
   await nameField.fill(expectedName);
   await expect(nameField).toHaveValue(expectedName);
-
-  // Switch back to main page
   await page.bringToFront();
-
-  // Click Blog
   await page.getByRole("link", { name: "Blog" }).click();
   await expect(page).toHaveURL(/blog/);
 });

@@ -4,25 +4,14 @@ import { loginToSmartERP, openCustomers } from "../helpers/smarterp";
 
 test("1. Multiple Wait Strategies", async ({ page }) => {
   await page.goto("https://smarterp-wgaw.onrender.com/");
-  // EXPLICIT ELEMENT STATE WAITING -Wait for username field
   await page.locator("#username").waitFor({ state: "visible" });
-  // auto wait
   await page.locator("#username").fill("admin");
   await page.locator("#password").fill("admin123");
-  // Wait until login button is enabled
   await expect(page.locator("#loginBtn")).toBeEnabled();
   await page.locator("#loginBtn").click();
-
-  // Wait for page to finish network loading
   await page.waitForLoadState("networkidle");
-
-  //explicit url wait
   await page.waitForURL("**/dashboard.html", { timeout: 60000 });
-
-  // Verify dashboard is displayed
   await expect(page).toHaveTitle("SmartERP Dashboard");
-
-  // EXPLICIT ELEMENT STATE WAITING:
   const mainContent = page
     .locator("main, .dashboard-container, #content")
     .first();
