@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-  test.setTimeout(50000);
   await page.goto('https://smarterp-wgaw.onrender.com/');
   await page.locator('#username').fill('admin');
   await page.locator('#password').fill('admin123');
@@ -29,14 +28,12 @@ test('Validate JSON Data', async () => {
     roles: ['QA', 'Admin'],
     date: '2026-07-30'
   };
-
   expect(typeof json.id).toBe('number');
   expect(typeof json.name).toBe('string');
   expect(json.Email).toContain('@');
   expect(typeof json.active).toBe('boolean');
   expect(json.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   expect(json).toHaveProperty('id');
-
 });
 
 test('Verify Database Connected', async ({ page }) => {
@@ -45,16 +42,12 @@ test('Verify Database Connected', async ({ page }) => {
 
 test('Verify Customer Status Dropdown', async ({ page }) => {
   await page.locator('#menuCustomers').click();
-  const dropdown = page.locator('#statusFilter');
-  await expect(dropdown).toBeVisible();
-  const options = await dropdown.locator('option').allTextContents();
-  const cleanedOptions = options.map(option => option.trim());
-  console.log('Dropdown Options:', cleanedOptions);
+const dropdown = page.locator('#statusFilter');
+await expect(dropdown).toBeVisible();
+const optionTexts = await dropdown.locator('option').allTextContents();
+const cleanedOptions = optionTexts.map(option => option.trim());
   expect(cleanedOptions.length).toBeGreaterThan(0);
   expect(cleanedOptions).toEqual(
-    expect.arrayContaining([
-      'Active',
-      'Inactive'
-    ])
+    expect.arrayContaining(['Active', 'Inactive'])
   );
 });
