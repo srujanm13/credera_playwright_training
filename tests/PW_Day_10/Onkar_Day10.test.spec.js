@@ -1,14 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { loginToSmartERP, openPlayground } from "../helpers/smarterp";
 test ('Handling Frames', async({ page }) => {
-  await page.goto('https://smarterp-wgaw.onrender.com/', { waitUntil: 'domcontentloaded' });
-  await page.getByPlaceholder('Enter username').fill('admin');
-  await page.getByPlaceholder('Enter password').fill('admin123');
-  await page.getByRole('button', { name: 'Login' }).click();
-  await expect(page).toHaveURL(/dashboard\.html$/)
-  await page.locator("//a[@id='playgroundMenu']").click();
-  const frameLocator = await page.frameLocator('#demoFrame')
+  await loginToSmartERP(page);
+  await openPlayground(page);
+  const frameLocator = await page.frameLocator('#demoFrame');
   const searchBox = frameLocator.getByRole('textbox', { name: 'Search customer...' });
-  await searchBox.click()
+  await searchBox.click();
   await searchBox.type('Rahul');
   await expect(searchBox).toHaveValue('Rahul');
 })
