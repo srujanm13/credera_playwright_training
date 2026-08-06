@@ -1,27 +1,21 @@
 import { test, expect } from '@playwright/test';
-import { loginToSmartERP } from "../helpers/smarterp";
+import { loginToSmartERP,openPlayground } from "../helpers/smarterp";
 
 const BASE_URL = 'https://smarterp-wgaw.onrender.com/'; 
 test('Assert Login Successful', async ({ page }) => {
-  await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
-  await page.getByPlaceholder('Enter username').fill('admin');
-  await page.getByPlaceholder('Enter password').fill('admin123');
-  await page.getByRole('button', { name: 'Login' }).click();
-  await page.waitForURL('**/dashboard.html', { timeout: 10000 });    
-  const currentUrl = page.url();
-  await expect(page).toHaveURL(/dashboard\.html$/);
-  await loginToSmartERP(page);
-  await page.locator('#menuCustomers').click();    
-  await page.waitForLoadState('networkidle', { timeout: 15000 });   
-  await page.waitForLoadState('domcontentloaded');
-  const customersTable = page.locator('table'); 
-  await expect(customersTable).toBeVisible();
-  await loginToSmartERP(page);
-  await page.locator('#menuCustomers').click();
-  await page.waitForLoadState('domcontentloaded');
-  const searchInput = page.getByPlaceholder('Search customer...'); 
-  await searchInput.fill('Rahul');
-  await expect(searchInput).toHaveValue('Rahul');
+await loginToSmartERP(page);
+await page.waitForURL('**/dashboard.html', { timeout: 10000 });
+await expect(page).toHaveURL(/dashboard\.html$/);
+await page.locator('#menuCustomers').click();    
+await page.waitForLoadState('networkidle', { timeout: 15000 });   
+await page.waitForLoadState('domcontentloaded');
+const customersTable = page.locator('table'); 
+await expect(customersTable).toBeVisible();
+await page.locator('#menuCustomers').click();
+await page.waitForLoadState('domcontentloaded');
+const searchInput = page.getByPlaceholder('Search customer...'); 
+await searchInput.fill('Rahul');
+await expect(searchInput).toHaveValue('Rahul');
 })
 
 test('Assertion Login successful',async({page})=>{
@@ -38,7 +32,6 @@ test('loading symbol assertion', async({page})=>{
   await page.getByPlaceholder('Enter username').fill('admin');
   await page.getByPlaceholder('Enter password').fill('admin123');
   await page.getByRole('button', { name: 'Login' }).click({timeout: 1000});
- // await page.waitForLoadState('load',{timeout: 1000});
   const loadingSpinner = page.locator('.spinner, .loader, [class*="loading"], [class*="spinner"]').first();
   await expect(loadingSpinner).not.toBeVisible();
 })
