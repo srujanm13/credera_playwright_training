@@ -1,4 +1,4 @@
-import {test,expect} from "../Fixtures/LoginFixture_mohit.js";
+import {test,expect} from "../../Fixtures/LoginFixture_mohit.js";
 
 test.describe("SMARTERP Login Module",() => {
     test("Verify Admin User Login",async ({ loginPage }) => {
