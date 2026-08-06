@@ -17,9 +17,7 @@ export class LoginPage extends BasePage {
     async enterPassword(password) {
         await this.enterText(this.passwordInput,password);
     }
-    async clickLogin() {
-        await this.clickElement(this.loginButton);
-    }
+    
     async clickLogin() {
     await Promise.all([
         this.page.waitForURL(/dashboard/i),
