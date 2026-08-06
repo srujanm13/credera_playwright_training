@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/srujanm13/credera_playwright_training#readme",
   "dependencies": {
+    "dotenv": "^17.4.2",
     "exceljs": "^3.4.0"
   },
   "devDependencies": {
