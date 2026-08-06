@@ -9,7 +9,7 @@ export class LoginPage extends BasePage {
         this.loginButton = page.locator("button[type='submit']");
     }
     async launchApplication() {
-        await this.navigate("https://smarterp-wgaw.onrender.com/");
+        await this.navigate("/");
     }
     async enterUsername(username) {
         await this.enterText(this.usernameInput,username);
@@ -20,6 +20,12 @@ export class LoginPage extends BasePage {
     async clickLogin() {
         await this.clickElement(this.loginButton);
     }
+    async clickLogin() {
+    await Promise.all([
+        this.page.waitForURL(/dashboard/i),
+        this.loginButton.click()
+    ]);
+}
     async login(username, password) {
         await this.enterUsername(username);
         await this.enterPassword(password);
