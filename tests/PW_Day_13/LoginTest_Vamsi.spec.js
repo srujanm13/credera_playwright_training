@@ -7,12 +7,18 @@ test.describe("SMART ERP Login", () => {
         await loginPage.loginAsAdmin();
         await loginPage.verifySuccessfulLogin();
     });
-    
 
     test("Verify Trainer Login", async ({ loginPage }) => {
         await loginPage.launchApplication(); 
         await loginPage.verifyLoginPage();
         await loginPage.loginAsTrainer();
         await loginPage.verifySuccessfulLogin();
+    });
+
+    test("Invalid Login", async ({ loginPage }) => {
+        await loginPage.launchApplication();
+        await loginPage.verifyLoginPage();
+        await loginPage.Invalid();
+        //await loginPage.verifySuccessfulLogin();
     });
 });

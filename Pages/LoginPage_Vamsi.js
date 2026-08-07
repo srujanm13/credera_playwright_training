@@ -31,6 +31,10 @@ async loginAsTrainer() {
 await this.login("trainer", "trainer123");
 }
 
+async Invalid() {
+    await this.login("Invalid", "invalid2");
+}
+
 async verifyLoginPage() {
 await expect(this.username).toBeVisible();
 await expect(this.password).toBeVisible();
