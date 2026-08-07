@@ -1,15 +1,14 @@
 import { test, expect } from '@playwright/test';
 import { loginToSmartERP, openCustomers } from '../helpers/smarterp';
 
-test('Await method', async ({ page, context }) => {
+test('Await method', async ({ page }) => {
 await page.goto('https://smarterp-wgaw.onrender.com/', {waitUntil: 'domcontentloaded'});
     await page.locator("#username").fill("admin");
     await page.locator("#password").fill("admin123");
     await page.locator("#loginBtn").click();
-    await context.close();
 });
 
-test('Loader Handling', async ({ page, context }) => {
+test('Loader Handling', async ({ page }) => {
     await page.goto('https://smarterp-wgaw.onrender.com/', {waitUntil: 'domcontentloaded'});
     await page.locator("#username").fill("admin");
     await page.locator("#password").fill("admin123");
@@ -19,10 +18,9 @@ test('Loader Handling', async ({ page, context }) => {
     if (await loader.count() > 0) {
         await loader.waitFor({ state: 'hidden' });
     }
-    await context.close();
 });
 
-test('Explicit Event Waiting', async ({ page, context }) => {
+test('Explicit Event Waiting', async ({ page }) => {
     await page.goto('https://smarterp-wgaw.onrender.com/', {waitUntil: 'domcontentloaded'});
     await page.locator("#username").fill("admin");
     await page.locator("#password").fill("admin123");
@@ -30,29 +28,26 @@ test('Explicit Event Waiting', async ({ page, context }) => {
     await expect(page).toHaveURL(/dashboard/);
     await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
     await page.waitForTimeout(3000);
-    await context.close();
 });
 
-test('Verify the success message after successful login', async ({ page, context }) => {
+test('Verify the success message after successful login', async ({ page}) => {
     await page.goto('https://smarterp-wgaw.onrender.com/', {waitUntil: 'domcontentloaded'});
     await page.locator("#username").fill("admin");
     await page.locator("#password").fill("admin123");
     await page.locator("#loginBtn").click();
     expect(page.locator("#successMessage")).toBeVisible();
     await page.waitForTimeout(3000);
-    await context.close();
 });
 
-test('Web First Assertions', async ({ page, context }) => {
+test('Web First Assertions', async ({ page }) => {
     await loginToSmartERP(page); 
     await expect(page).toHaveURL(/dashboard/);
     await expect(
         page.getByRole('heading', { name: 'Dashboard' })
     ).toBeVisible();
-    await context.close();
 });
 
-test('Validate JSON response', async ({ context }) => {
+test('Validate JSON response', async ( ) => {
 
   const json = {
         id: 4567,         
@@ -69,13 +64,11 @@ test('Validate JSON response', async ({ context }) => {
     expect(typeof json.active).toBe("boolean");
     expect(json.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     expect(json).toHaveProperty("id");
-    await context.close();
 });
 
 test('Verify Database connected is present with a green check in System Status', async ({ page, context }) => {
     await loginToSmartERP(page);
     await expect(page.getByText("✅ Database Connected")).toBeVisible();
-    await context.close();
 });
 
 test('Verify Customer Status dropdown values', async ({ page, context }) => {
@@ -85,5 +78,4 @@ test('Verify Customer Status dropdown values', async ({ page, context }) => {
     const options = await dropdown.locator("option").allTextContents();
     const trimmedOptions = options.map(option => option.trim());
     console.log(trimmedOptions);
-    await context.close();
 });
