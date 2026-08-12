@@ -12,7 +12,6 @@ test('capture storagestate', async({page})=>{
 test.use({storageState:'./ilangovanstate.json'});
 
 test.only('use storage state', async({page})=>{
-
     page.goto("https://bookcart.azurewebsites.net/")
     await expect(page.locator('mat-toolbar-row')).toContainText(' ortoni');
     await page.getByText('account_circlearrow_drop_down').click();
