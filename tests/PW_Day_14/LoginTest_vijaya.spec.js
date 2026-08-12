@@ -17,7 +17,6 @@ test("Login using CLI parameters", async ({loginPage})=>{
     );
     await loginPage.verifyLoginSuccessful();
 });
-
 test("Verify Login Using Environment Configuration", async ({loginPage})=>{
     await loginPage.launchApplication();
     await loginPage.login(process.env.env_USERNAME, process.env.env_PASSWORD);
