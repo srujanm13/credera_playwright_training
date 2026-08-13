@@ -9,13 +9,24 @@ dtenv.config({
 path: path.join(__dirname, '../../env/.env.Akhila')
 });
 
-test("Admin Login Test", async ({ loginPage }) => {
+test("Admin Login Test using Environment Variables", async ({ loginPage }) => {
     await loginPage.launchApplication();
     
     console.log(path.join(__dirname, '../../env/.env.Akhila'));
     console.log(__dirname, __filename);
     console.log("uname =", process.env.uname);
     console.log("pswd =", process.env.pswd);
+    await loginPage.login(process.env.uname, process.env.pswd); 
+    await loginPage.verifySuccessfulLogin();
+});
+
+test("Admin Login Test using Bash", async ({ loginPage }) => {
+    await loginPage.launchApplication();
+    
+    console.log(path.join(__dirname, '../../env/.env.Akhila'));
+    console.log(__dirname, __filename);
+    console.log("Bashuname =", process.env.uname);
+    console.log("Bashpswd =", process.env.pswd);
     await loginPage.login(process.env.uname, process.env.pswd); 
     await loginPage.verifySuccessfulLogin();
 });
