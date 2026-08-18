@@ -1,3 +1,0 @@
-const string = "I love javascript";
-const reverse = string.split(' ').map(word => word.split('').reverse().join('')).join(' ');
-console.log(reverse); 

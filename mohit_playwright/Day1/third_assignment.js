@@ -1,1 +1,0 @@
-console.log(Number("99.99")+0.01); //converted "99.99" to number then added 0.01 to it.
