@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test('Events CRUD Flow', async ({ request }) => {
+test('Playwright API Test Flow', async ({ request }) => {
   let token;
   let eventId;
   const currentDate = Date.now();
   const email = `testuser${currentDate}@gmail.com`;
   const password = 'Password123';
 
-  await test.step('Register user', async () => {
+  await test.step('user registration' , async () => {
     const response = await request.post(
       'https://api.eventhub.rahulshettyacademy.com/api/auth/register',
       {
@@ -41,8 +41,7 @@ test('Events CRUD Flow', async ({ request }) => {
     token = responseBody.token;
   });
 
-  // Step 3: Create Event
-  await test.step('Create event', async () => {
+  await test.step('Event Creation', async () => {
     const response = await request.post(
       'https://api.eventhub.rahulshettyacademy.com/api/events',
       {
