@@ -132,4 +132,3 @@ test('Events CRUD Flow', async ({ request }) => {
         expect(response.status()).toBe(404);
     });
 });
-
