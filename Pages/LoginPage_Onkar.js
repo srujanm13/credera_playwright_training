@@ -9,7 +9,7 @@ constructor(page){
     this.loginButton = page.getByRole('button');
    }
  async launchSmartERP() {
-        await this.navigate("https://smarterp-wgaw.onrender.com/");
+        await this.navigate("/");
     }
     async enterUsername(username) {
         await this.enterText(this.usernameInput,username);
@@ -17,7 +17,6 @@ constructor(page){
     async enterPassword(password) {
         await this.enterText(this.passwordInput,password);
     }
-    
     async clickLogin() {
     await Promise.all([
         this.page.waitForURL(/dashboard/i),
@@ -36,7 +35,7 @@ constructor(page){
         await this.login("admin","admin123");
     }
     async verifyLoginSuccessful() {
-        await expect(this.page).toHaveURL(/dashboard/i);
+        await expect(this.page).toHaveURL(/dashboard/i, {timeout : 10000});
     }
     async verifyLoginPageLoaded() {
         await expect(this.usernameInput).toBeVisible();
